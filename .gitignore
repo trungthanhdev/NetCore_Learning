@@ -26,8 +26,9 @@ secrets.json
 
 ## ASP.NET app settings (local only)
 appsettings.Development.json
-
+appsettings.json
 ## NuGet packages
 *.nupkg
 *.snupkg
 packages/
+.DS_Store
