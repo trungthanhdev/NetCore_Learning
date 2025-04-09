@@ -140,3 +140,4 @@
 /Applications/ASP.NetCore_Learning/NetCore_Learning/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
 /Applications/ASP.NetCore_Learning/NetCore_Learning/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /Applications/ASP.NetCore_Learning/NetCore_Learning/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
+/Applications/ASP.NetCore_Learning/NetCore_Learning/obj/Debug/net8.0/NetCore_Learning.sourcelink.json

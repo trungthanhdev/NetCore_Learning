@@ -11,7 +11,7 @@ namespace NetCore_Learning.Interfaces
 {
     public interface IStockRepository
     {
-        Task<List<StockDto>> GetAllStocksAsync();
+        Task<List<StockDto>> GetAllStocksAsync(QueryObject query);
         Task<Stock?> GetStockByIdAsync(Guid id);
         Task<Stock> CreateNewStockAsync(Stock stockModel);
         Task<Stock?> UpdateStockAsync(Guid id, ReqUpdateStockDto updateStockDto);
