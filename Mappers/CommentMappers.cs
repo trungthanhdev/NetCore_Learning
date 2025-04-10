@@ -18,7 +18,10 @@ namespace NetCore_Learning.Mappers
                 Title = commentModel.Title,
                 Content = commentModel.Content,
                 CreateOn = commentModel.CreateOn,
-                StockId = commentModel.StockId
+                StockId = commentModel.StockId,
+                // UserName = commentModel!.AppUser!.UserName ?? "Unknown",
+                // User_id = commentModel.AppUser.Id,
+                // Email = commentModel.AppUser.Email ?? "Unknown"
             };
         }
 

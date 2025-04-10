@@ -54,30 +54,6 @@ var issuer = Environment.GetEnvironmentVariable("JWT__Issuer");
 var audience = Environment.GetEnvironmentVariable("JWT__Audience");
 var signingKey = Environment.GetEnvironmentVariable("JWT__SigningKey");
 
-// Console.WriteLine("JWT__Issuer: " + issuer);
-// Console.WriteLine("JWT__Audience: " + audience);
-// Console.WriteLine("JWT__SigningKey: " + signingKey);
-
-// builder.Services.AddAuthentication(option =>
-// {
-//     option.DefaultAuthenticateScheme =
-//     option.DefaultChallengeScheme =
-//     option.DefaultForbidScheme =
-//     option.DefaultScheme =
-//     option.DefaultSignInScheme =
-//     option.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
-// }).AddJwtBearer(option =>
-// {
-//     option.TokenValidationParameters = new TokenValidationParameters
-//     {
-//         ValidateIssuer = true,
-//         ValidIssuer = builder.Configuration["JWT__Issuer"],
-//         ValidateAudience = true,
-//         ValidAudience = builder.Configuration["JWT__Audience"],
-//         ValidateIssuerSigningKey = true,
-//         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT__SigningKey")))
-//     };
-// });
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -102,6 +78,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 
 var app = builder.Build();
 

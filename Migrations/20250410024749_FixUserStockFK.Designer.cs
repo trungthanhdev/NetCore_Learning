@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCore_Learning.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NetCore_Learning.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250410024749_FixUserStockFK")]
+    partial class FixUserStockFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,9 +241,6 @@ namespace NetCore_Learning.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("text");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
@@ -256,8 +256,6 @@ namespace NetCore_Learning.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Comment_id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("StockId");
 
@@ -315,7 +313,7 @@ namespace NetCore_Learning.Migrations
 
                     b.HasIndex("User_id");
 
-                    b.ToTable("Portfolios");
+                    b.ToTable("UserStock");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -371,15 +369,9 @@ namespace NetCore_Learning.Migrations
 
             modelBuilder.Entity("NetCore_Learning.Models.Comment", b =>
                 {
-                    b.HasOne("NetCore_Learning.Models.AppUser", "AppUser")
-                        .WithMany("Comment")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("NetCore_Learning.Models.Stock", "Stock")
                         .WithMany("Comment")
                         .HasForeignKey("StockId");
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Stock");
                 });
@@ -405,8 +397,6 @@ namespace NetCore_Learning.Migrations
 
             modelBuilder.Entity("NetCore_Learning.Models.AppUser", b =>
                 {
-                    b.Navigation("Comment");
-
                     b.Navigation("UserStock");
                 });
 

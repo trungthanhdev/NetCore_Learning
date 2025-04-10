@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NetCore_Learning.Dtos.Comment.Request;
 using NetCore_Learning.Interfaces;
@@ -34,21 +36,22 @@ namespace NetCore_Learning.Controllers
         }
 
         [HttpPost("do-comment")]
+        [Authorize]
         public async Task<IActionResult> CreateComment([FromBody] ReqCreateCommentDto reqComment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-
+            var user_id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            System.Console.WriteLine($"userid nhan vao: {user_id}");
+            if (user_id == null) return Unauthorized();
             if (!await _stockRepo.StockExist(reqComment.StockId))
             {
                 return NotFound("Stock does not exist!");
             }
-            var comment = await _commentRepo.CreateComment(reqComment);
-            return CreatedAtAction(nameof(GetById), new { id = comment.Comment_id }, comment.toCommentDto());
-
-
+            var comment = await _commentRepo.CreateComment(reqComment, user_id);
+            return CreatedAtAction(nameof(GetById), new { id = comment.Comment_id }, comment);
         }
 
 

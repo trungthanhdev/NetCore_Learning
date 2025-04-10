@@ -18,7 +18,7 @@ namespace NetCore_Learning.Data
         }
         public DbSet<Stock> Stock { get; set; }
         public DbSet<Comment> Comment { get; set; }
-
+        public DbSet<UserStock> UserStock { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

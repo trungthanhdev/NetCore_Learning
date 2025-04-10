@@ -8,6 +8,7 @@ namespace NetCore_Learning.Models
 {
     public class AppUser : IdentityUser
     {
-
+        public List<UserStock> UserStock { get; set; } = new List<UserStock>();
+        public List<Comment> Comment { get; set; } = new List<Comment>();
     }
 }

@@ -29,7 +29,9 @@ namespace NetCore_Learning.Services
             {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName ?? ""),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, role),
+                new Claim("id", Guid.NewGuid().ToString()),
+                new Claim("sub",user.Id ?? "")
             };
             //ki
             var creds = isAccess ? new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature)

@@ -44,12 +44,24 @@ namespace NetCore_Learning.Controllers
                 if (createdUser.Succeeded)
                 {
                     var roles = await _userManager.AddToRoleAsync(appUser, "User");
-
+                    var getRole = await _userManager.GetRolesAsync(appUser);
+                    var role = getRole.FirstOrDefault();
                     if (roles.Succeeded)
                     {
-                        var access_token = _tokenServcie.CreateToken(appUser, "User", true);
-                        var refresh_token = _tokenServcie.CreateToken(appUser, "User", false);
-                        return Ok(new { access_token = access_token, refresh_token = refresh_token });
+                        var user = new
+                        {
+                            UserName = appUser.UserName,
+                            Email = appUser.Email,
+                            role = getRole
+                        };
+                        var access_token = _tokenServcie.CreateToken(appUser, role!, true);
+                        var refresh_token = _tokenServcie.CreateToken(appUser, role!, false);
+                        return Ok(new
+                        {
+                            user = user,
+                            access_token = access_token,
+                            refresh_token = refresh_token
+                        });
                     }
                     else
                     {
@@ -64,6 +76,43 @@ namespace NetCore_Learning.Controllers
             catch (Exception)
             {
                 // return StatusCode(500, e);
+                throw;
+            }
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var user = await _userManager.FindByNameAsync(loginDto.Username);
+
+                if (user == null)
+                {
+                    return NotFound("User not found!");
+                }
+                var roles = await _userManager.GetRolesAsync(user);
+                var role = roles.FirstOrDefault() ?? "User";
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+                if (!isPasswordValid)
+                    return BadRequest("Password is wrong!");
+
+                var access_token = _tokenServcie.CreateToken(user, role, true);
+                var refresh_token = _tokenServcie.CreateToken(user, role, false);
+                return Ok(new
+                {
+                    access_token,
+                    refresh_token
+                });
+
+
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

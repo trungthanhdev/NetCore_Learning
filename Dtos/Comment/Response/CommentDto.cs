@@ -12,5 +12,8 @@ namespace NetCore_Learning.Dtos.Comment.Response
         public string Content { get; set; } = string.Empty;
         public DateTime CreateOn { get; set; } = DateTime.Now;
         public Guid? StockId { get; set; }
+        // public string UserName { get; set; } = string.Empty;
+        // public string User_id { get; set; } = string.Empty;
+        // public string Email { get; set; } = string.Empty;
     }
 }

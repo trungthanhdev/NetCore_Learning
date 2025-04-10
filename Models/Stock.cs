@@ -21,5 +21,6 @@ namespace NetCore_Learning.Models
         public long MarketCap { get; set; }
         //one to many relationship
         public List<Comment> Comment { get; set; } = new List<Comment>();
+        public List<UserStock> UserStock { get; set; } = new List<UserStock>();
     }
 }
