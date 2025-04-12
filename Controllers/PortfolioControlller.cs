@@ -45,7 +45,7 @@ namespace NetCore_Learning.Controllers
             System.Console.WriteLine($"di: {di}");
             var token_id = User.FindFirst("id")?.Value;
             System.Console.WriteLine($"token_id : {token_id}");
-            System.Console.WriteLine(email.ToString());
+            // System.Console.WriteLine(email.ToString());
             var user1 = await _context.Users.FirstOrDefaultAsync(x => x.Id == email);
             System.Console.WriteLine(user1);
 

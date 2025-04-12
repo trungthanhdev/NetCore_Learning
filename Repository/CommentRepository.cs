@@ -56,8 +56,8 @@ namespace NetCore_Learning.Repository
                     Content = userComment.Content,
                     CreateOn = userComment.CreateOn,
                     StockId = userComment.StockId ?? Guid.Empty,
-                    Username = userComment!.AppUser!.UserName,
-                    Email = userComment.AppUser.Email,
+                    Username = userComment!.AppUser!.UserName ?? "",
+                    Email = userComment.AppUser.Email ?? "",
                     User_id = userComment.AppUser.Id
                 };
 

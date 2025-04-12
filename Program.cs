@@ -69,7 +69,7 @@ builder.Services.AddAuthentication(options =>
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"])),
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = false,
+        ValidateLifetime = true,
         ValidateIssuerSigningKey = true
     };
 });
@@ -79,6 +79,9 @@ builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+
+// builder.WebHost.UseUrls("http://0.0.0.0:5001");
+
 
 var app = builder.Build();
 
@@ -92,6 +95,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 //Map de Swagger hoat dong
 app.MapControllers();

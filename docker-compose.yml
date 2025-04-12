@@ -1,0 +1,25 @@
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: Stock
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bntrthanh1011
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+  net-core-api-be:
+    build: 
+      context: .
+    ports: 
+      - "1012:5001"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Username=postgres;Password=bntrthanh1011;Database=Stock
+    depends_on:
+      - db
+volumes:
+  local_pgdata: {}
+      

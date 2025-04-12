@@ -63,7 +63,7 @@ namespace NetCore_Learning.Repository
             var allStock = await _context.UserStock
                 .Where(x => x.User_id == User_id && x.Stock != null)
                 .Include(x => x.Stock)
-                .ThenInclude(x => x.Comment)
+                .ThenInclude(x => x!.Comment)
                 .Select(x => x.Stock!.toStockDto())
                 .ToListAsync();
             // return allStock.Where(x => x.Comments != null).ToList();
