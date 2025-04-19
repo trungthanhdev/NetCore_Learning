@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NetCore_Learning")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8d4ecc8d8dcab3b3cb119ef090b631c83fda1db")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1db147baa903cd88cdd3a3004d3e4dba99bbfb9a")]
 [assembly: System.Reflection.AssemblyProductAttribute("NetCore_Learning")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NetCore_Learning")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

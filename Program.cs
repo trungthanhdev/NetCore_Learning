@@ -66,7 +66,7 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey
-        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"])),
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]!)),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -82,6 +82,7 @@ builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 
 // builder.WebHost.UseUrls("http://0.0.0.0:5001");
 
+builder.Services.AddSingleton<MqttService>();
 
 var app = builder.Build();
 
