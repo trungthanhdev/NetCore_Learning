@@ -18,5 +18,8 @@ namespace NetCore_Learning.Models
         [ForeignKey(nameof(AppUser))]
         public string User_id { get; set; } = "";
         public AppUser? AppUser { get; set; }
+        [ForeignKey(nameof(Org))]
+        public Guid org_id { get; set; }
+        public Org? Org { get; set; }
     }
 }
